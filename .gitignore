@@ -7,3 +7,9 @@ local_settings.py
 usuarios.txt
 /deploy
 /python
+/static/admin
+/static/img
+/static/media
+/static/mezzanine
+/static/filebrowser
+/static/grappelli
