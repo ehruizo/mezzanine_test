@@ -60,7 +60,7 @@ def test3(request):
 def index(request):
     users = Users.objects.annotate(total_inv=Count('invoices__invoice')).order_by('-total_inv', 'last_name')
     context = {'user_list': users}
-    return render(request, 'dbtest/dbtest_index.html', context)
+    return render(request, 'dbtest/index.html', context)
 
 
 @login_required

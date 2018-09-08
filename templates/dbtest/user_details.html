@@ -1,25 +1,29 @@
-{% extends "dbtest/dbtest_base.html" %}
+{% extends "dbtest/base.html" %}
 {% load humanize %}
+
+{% block right_block_options %}
+	<a href="{% url 'dbtest:newinvoice' user_data.document %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">Nueva factura</a>
+{% endblock %}
+
 {% block title %}Facturas{% endblock %}
-{% block dbtest_main %}
-<div class="pull-right">
-<a href="{% url 'dbtest:newinvoice' user_data.document %}" class="btn-success" role="button">Crear</a>
-</div>
-Documento: <strong>{{ user_data.document }}</strong><br/>
-Apellido: <strong>{{ user_data.last_name }}</strong><br/>
-Nombre: <strong>{{ user_data.first_name }}</strong><br/>
-Fecha de nacimiento: <strong>{{ user_data.birth_date }} ({{ age }} años)</strong><br/>
-<br/>
-{% if inv_list %}
-    <table class="table table-striped table-bordered">
-	<thead><tr><td>Factura</td><td>Fecha</td><td>Monto</td></tr></thead>
-	<tbody>
-    {% for i in inv_list %}
-    <tr><td><a href="{% url 'dbtest:invdetails' i.invoice %}">{{ i.invoice }}</a></td><td>{{ i.invoice_date }}</td><td>$ {{ i.total_value | intcomma }}</td></tr>
-    {% endfor %}
-    </tbody>
-	</table>
-{% else %}
-    <p>El usuario no tiene facturas.</p>
-{% endif %}
+
+{% block main%}
+	<ul>
+		<li>Documento: <strong>{{ user_data.document }}</strong></li>
+		<li>Apellido: <strong>{{ user_data.last_name }}</strong></li>
+		<li>Nombre: <strong>{{ user_data.first_name }}</strong></li>
+		<li>Fecha de nacimiento: <strong>{{ user_data.birth_date }} ({{ age }} años)</strong></li>
+	</ul>
+	{% if inv_list %}
+		<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+		<thead><tr><th>Factura</th><th>Fecha</th><th>Monto</th></tr></thead>
+		<tbody>
+		{% for i in inv_list %}
+		<tr><td><a href="{% url 'dbtest:invdetails' i.invoice %}">{{ i.invoice }}</a></td><td>{{ i.invoice_date }}</td><td>$ {{ i.total_value | intcomma }}</td></tr>
+		{% endfor %}
+		</tbody>
+		</table>
+	{% else %}
+		<p>El usuario no tiene facturas.</p>
+	{% endif %}
 {% endblock %}

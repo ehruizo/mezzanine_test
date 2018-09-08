@@ -1,12 +1,13 @@
-{% extends "dbtest/dbtest_base.html" %}
+{% extends "dbtest/base.html" %}
+
 {% block title %}Scorer{% endblock %}
-{% block dbtest_main %}
-<div class="pull-right">
+
+{% block main %}
 <table class="table table-bordered">
-<thead><tr><td>Probabilidad</td><td>Clase</td></tr></thead>
-<tbody><tr><td id="js-prob"></td><td id="js-class"></td></tr></tbody>
+	<thead><tr><th>Probabilidad</th><th>Clase</th></tr></thead>
+	<tbody><tr><td id="js-prob"></td><td id="js-class"></td></tr></tbody>
 </table>
-</div>
+
 <form action="" method="get">
 	<table class="dataentry">
 	{{ form.as_table }}
@@ -21,6 +22,7 @@
 </ul> 
 {% endif %}
 {% endblock %}
+
 {% block extra_scripts %}
 <script>
 function getScore() {

@@ -1,0 +1,32 @@
+{% extends "dbtest/base.html" %}
+
+{% block right_block_options %}
+	<a href="{% url 'dbtest:newuser' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">Crear usuario</a>
+{% endblock %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block main %}
+{% if user_list %}
+	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+	  <thead>
+		<tr>
+		  <th>Documento</th>
+		  <th>Nombre Cliente</th>
+		  <th>Facturas</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		{% for user in user_list %}
+		<tr>
+		  <td><a href="{% url 'dbtest:userinv' user.document %}">{{ user.document }}</a></td>
+		  <td style="text-align: left;">{{ user.last_name }}, {{ user.first_name }}</td>
+		  <td>{{ user.total_inv }}</td>
+		</tr>
+		{% endfor %}
+	  </tbody>
+	</table>
+{% else %}
+	<p>No hay usuarios.</p>
+{% endif %}
+{% endblock %}

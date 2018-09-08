@@ -1,22 +1,22 @@
-{% extends "dbtest/dbtest_base.html" %}
+{% extends "dbtest/base.html" %}
 {% load humanize %}
-{% block title %}Detalle factura{% endblock %}
-{% block dbtest_main %}
-Usuario: <strong><a href="{% url 'dbtest:userinv' user_data.document %}">{{ user_data.document }} - {{ user_data.last_name }}, {{ user_data.first_name }}</a></strong><br/>
-Factura: <strong>{{ inv_data.invoice }}</strong><br/>
-Fecha: <strong>{{ inv_data.invoice_date }}</strong><br/>
-Valor: <strong>$ {{ total_value.value | intcomma }}</strong><br/>
-<br/>
-<form action="" method="post">
+
+{% block title %}Detalle Factura # {{ inv_data.invoice }}{% endblock %}
+
+{% block main %}
+<ul>
+	<li>Usuario: <strong><a href="{% url 'dbtest:userinv' user_data.document %}">{{ user_data.document }} - {{ user_data.last_name }}, {{ user_data.first_name }}</a></strong></li>
+	<li>Fecha: <strong>{{ inv_data.invoice_date }}</strong></li>
+	<li>Valor: <strong>$ {{ total_value.value | intcomma }}</strong></li>
+</ul>
+<form action="" method="post" class="form-inline">
 	{% csrf_token %}
-	<table class="transposed">
-	{{ form.as_table }}
-	</table>
+	{{ form }}
 	<input type="submit" value="Agregar" />
 </form>
 <br/>
 {% if products %}
-    <table class="table table-striped table-bordered">
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 	<thead>
 		<tr>
 			<th>Factura</th>
@@ -32,7 +32,7 @@ Valor: <strong>$ {{ total_value.value | intcomma }}</strong><br/>
 		<tr>
 			<td>{{ inv_data.invoice }}</td>
 			<td>{{ p.id }}</td>
-			<td>{{ p.product }}</td>
+			<td style="text-align: left;">{{ p.product }}</td>
 			<td>{{ p.quantity | intcomma }}</td>
 			<td>$ {{ p.price | intcomma }}</td>
 			<td>
@@ -69,8 +69,6 @@ Valor: <strong>$ {{ total_value.value | intcomma }}</strong><br/>
 		{% endif %}
 		</ul>
 {% endif %}
-	
-	
 {% else %}
     <p>La factura no tiene productos.</p>
 {% endif %}

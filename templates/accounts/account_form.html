@@ -1,9 +1,8 @@
-{% extends "content.html" %}
+{% extends "dbtest/base.html" %}
 {% load i18n mezzanine_tags %}
 
 {% block meta_title %}{{ title }}{% endblock %}
 {% block title %}{{ title }}{% endblock %}
-{% block body_id %}account{% endblock %}
 
 {% block breadcrumb_menu %}
 {{ block.super }}
