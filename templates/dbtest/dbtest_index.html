@@ -1,0 +1,16 @@
+{% extends "dbtest/dbtest_base.html" %}
+{% block title %}Clientes{% endblock %}
+{% block dbtest_main %}
+<div class="pull-right">
+<a href="{% url 'dbtest:newuser' %}" class="btn-success" role="button">Nuevo</a>
+</div>
+{% if user_list %}
+    <ul>
+    {% for user in user_list %}
+    <li><a href="{% url 'dbtest:userinv' user.document %}">{{ user.document }} - {{ user.last_name }}, {{ user.first_name }} ({{ user.total_inv }})</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay usuarios.</p>
+{% endif %}
+{% endblock %}

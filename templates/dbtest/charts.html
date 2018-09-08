@@ -1,0 +1,41 @@
+{% extends "dbtest/dbtest_base.html" %}
+{% block extra_headers %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+{% endblock %}
+{% block title %}Charts{% endblock %}
+{% block dbtest_main %}
+<div class="form-group">
+  <label for="sel1">Cliente:</label>
+  <select class="form-control" id="client_selector">
+  <option value="all">Todos</option>
+  {% for u in users %}
+    <option value="{{ u.document }}">{{ u.first_name }}</option>
+  {% endfor %}
+  </select>
+</div> 
+<div id="chart_1" style="width: 600px; height: 300px;"></div>
+{% endblock %}
+{% block extra_scripts %}
+<script>
+google.charts.load('current', {'packages':['bar']});
+google.charts.setOnLoadCallback(drawSales);
+function drawSales() {
+	var selected_customer = $('#client_selector option:selected').val();
+	$.get('', {'document': selected_customer}, function(resp) { drawChart(resp.data); } );
+	function drawChart(jdata) {
+		var data = google.visualization.arrayToDataTable(jdata);
+		var options = {
+		  chart: {
+			title: 'Ventas por Cliente',
+			subtitle: '2014-2017',
+		  },
+		  bars: 'horizontal',
+		  hAxis: {format: 'currency'},
+		};
+		var chart = new google.charts.Bar(document.getElementById('chart_1'));
+		chart.draw(data, google.charts.Bar.convertOptions(options));
+	};
+};
+$("#client_selector").change(drawSales);
+</script>
+{% endblock %}

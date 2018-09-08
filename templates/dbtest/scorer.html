@@ -1,0 +1,37 @@
+{% extends "dbtest/dbtest_base.html" %}
+{% block title %}Scorer{% endblock %}
+{% block dbtest_main %}
+<div class="pull-right">
+<table class="table table-bordered">
+<thead><tr><td>Probabilidad</td><td>Clase</td></tr></thead>
+<tbody><tr><td id="js-prob"></td><td id="js-class"></td></tr></tbody>
+</table>
+</div>
+<form action="" method="get">
+	<table class="dataentry">
+	{{ form.as_table }}
+	</table>
+	<input type="submit" value="Enviar" />
+</form>
+<br/>
+{% if score %}
+<ul>
+	<li>Probabilidad: <strong>{{ score.probability }}</strong></li>
+	<li>Clase: <strong>{{ score.class }}</strong></li>
+</ul> 
+{% endif %}
+{% endblock %}
+{% block extra_scripts %}
+<script>
+function getScore() {
+	var data = {'sepal_length': $('#id_sepal_length').val(), 'sepal_width': $('#id_sepal_width').val(), 
+				'petal_length': $('#id_petal_length').val(), 'petal_width': $('#id_petal_width').val()};
+	$.get('', data, function(resp) { $('#js-prob').text(resp.probability); $('#js-class').text(resp.class); } );
+};
+getScore();  					// popula la tabla después de un GET (cuando se envía el formulario o se recarga la página)
+$("#id_sepal_length").change(getScore);
+$("#id_sepal_width").change(getScore);
+$("#id_petal_length").change(getScore);
+$("#id_petal_width").change(getScore);
+</script>
+{% endblock %}

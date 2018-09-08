@@ -1,0 +1,21 @@
+{% extends "dbtest/dbtest_base.html" %}
+{% block title %}Nueva factura{% endblock %}
+{% block dbtest_main %}
+Usuario: <strong><a href="{% url 'dbtest:userinv' user_data.document %}">({{ user_data.document }}) {{ user_data.last_name }}, {{ user_data.first_name }}</a></strong><br/>
+<br/>
+<form action="" method="post">
+	{% csrf_token %}
+	<table class="dataentry">
+	{{ form.as_table }}
+	</table>
+	<input type="submit" value="Crear" />
+</form>
+{% endblock %}
+{% block extra_scripts %}
+<script type="text/javascript">
+$(function () {
+	$('#id_invoice_d').datepicker({ format: 'yyyy-mm-dd'});
+	$('#id_invoice_t').timepicker({ 'timeFormat': 'H:i:s' });
+});
+</script>
+{% endblock %}

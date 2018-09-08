@@ -1,0 +1,5 @@
+Mezzanine
+django-rest-framework
+scikit-learn
+numpy
+scipy

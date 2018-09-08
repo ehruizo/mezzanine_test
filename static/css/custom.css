@@ -1,0 +1,5 @@
+.transposed tr { display: block; float: left; }
+.transposed th, .transposed  td { display: block; padding: 1px}
+.transposed th { background-color: #BDBDBD;}
+
+.dataentry th, .dataentry td { padding: 2px;}
