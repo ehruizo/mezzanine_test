@@ -2,10 +2,11 @@
 {% load humanize %}
 
 {% block right_block_options %}
-	<a href="{% url 'dbtest:newinvoice' user_data.document %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">Nueva factura</a>
+	<a href="{% url 'dbtest:newuser' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">person_add</i>Nuevo cliente</a>
+	<a href="{% url 'dbtest:newinvoice' user_data.document %}" class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">add_shopping_cart</i>Nueva factura</a>
 {% endblock %}
 
-{% block title %}Facturas{% endblock %}
+{% block section_title %}Facturas{% endblock %}
 
 {% block main%}
 	<ul>

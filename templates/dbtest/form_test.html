@@ -1,6 +1,7 @@
 {% extends "dbtest/base.html" %}
 
 {% block title %}Ajax{% endblock %}
+{% block section_title %}Ajax Test{% endblock %}
 
 {% block main %}
 	<p id="js-message" style="color: red;"></p>
@@ -11,6 +12,7 @@
 		</table>
 		<input type="submit" value="Agregar" />
 	</form>
+	<br/>
 	{% if test_data %}
 		<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 		<thead><tr><th>Id</th><th>Value</th></tr></thead>

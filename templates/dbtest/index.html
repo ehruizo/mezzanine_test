@@ -1,10 +1,10 @@
 {% extends "dbtest/base.html" %}
 
 {% block right_block_options %}
-	<a href="{% url 'dbtest:newuser' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">Crear usuario</a>
+	<a href="{% url 'dbtest:newuser' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">person_add</i>Nuevo cliente</a>
 {% endblock %}
 
-{% block title %}Clientes{% endblock %}
+{% block section_title %}Clientes{% endblock %}
 
 {% block main %}
 {% if user_list %}

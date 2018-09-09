@@ -1,7 +1,12 @@
 {% extends "dbtest/base.html" %}
 {% load humanize %}
 
-{% block title %}Detalle Factura # {{ inv_data.invoice }}{% endblock %}
+{% block section_title %}Detalle Factura # {{ inv_data.invoice }}{% endblock %}
+
+{% block right_block_options %}
+	<a href="{% url 'dbtest:newuser' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">person_add</i>Nuevo cliente</a>
+	<a href="{% url 'dbtest:newinvoice' user_data.document %}" class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">add_shopping_cart</i>Nueva factura</a>
+{% endblock %}
 
 {% block main %}
 <ul>
@@ -9,14 +14,18 @@
 	<li>Fecha: <strong>{{ inv_data.invoice_date }}</strong></li>
 	<li>Valor: <strong>$ {{ total_value.value | intcomma }}</strong></li>
 </ul>
-<form action="" method="post" class="form-inline">
+
+<form action="" method="post" style="display: inline;">
 	{% csrf_token %}
 	{{ form }}
-	<input type="submit" value="Agregar" />
+	<br/>
+	<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Agregar" />
 </form>
 <br/>
+<br/>
+<p><strong>Productos:</strong></p>
 {% if products %}
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 	<thead>
 		<tr>
 			<th>Factura</th>
@@ -28,7 +37,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	{% for p in products %}
+		{% for p in products %}
 		<tr>
 			<td>{{ inv_data.invoice }}</td>
 			<td>{{ p.id }}</td>
@@ -39,17 +48,17 @@
 				<form action="{% url 'dbtest:delprodinv' inv_data.invoice %}" method="post">
 					{% csrf_token %}
 					<input type="hidden" name="purchase_id" value="{{ p.id }}"/>
-					<input type="submit" class="btn-link" value="Eliminar"/>
+					<input type="submit" class="mdl-button mdl-js-button mdl-button--primary" value="Eliminar"/>
 				</form>
 			</td>
 		</tr>
-	{% endfor %}
+		{% endfor %}
 	</tbody>
-    </table>
-	
+	</table>
+
 	<!-- paginación -->
 	{% if products.paginator.num_pages > 1 %}
-		<ul class="pagination">
+		<ul class="pagination pg-blue">
 		{% if products.has_previous %}
 			<li><a href="?page={{ products.previous_page_number }}">&#10094;</a></li>
 		{% else %}
@@ -57,9 +66,9 @@
 		{% endif %}
 		{% for pnum in products.paginator.page_range %}
 			{% if pnum == products.number %}
-				<li class="active"><a>{{ pnum }}</a></li>
+				<li class="page-item active"><a>{{ pnum }}</a></li>
 			{% else %}
-				<li><a href="?page={{ pnum }}">{{ pnum }}</a></li>
+				<li class="page-item"><a href="?page={{ pnum }}">{{ pnum }}</a></li>
 			{% endif %}
 		{% endfor %}
 		{% if products.has_next %}
@@ -68,7 +77,7 @@
 			<li><a>&#10095;</a></li>
 		{% endif %}
 		</ul>
-{% endif %}
+	{% endif %}
 {% else %}
     <p>La factura no tiene productos.</p>
 {% endif %}

@@ -5,8 +5,10 @@
 {% endblock %}
 
 {% block title %}Charts{% endblock %}
+{% block section_title %}Google Charts{% endblock %}
 
 {% block main %}
+<div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
 	<div class="form-group">
 	  <label for="sel1">Cliente:</label>
 	  <select class="form-control" id="client_selector">
@@ -17,6 +19,7 @@
 	  </select>
 	</div> 
 	<div id="chart_1" style="width: 600px; height: 300px;"></div>
+</div>
 {% endblock %}
 
 {% block extra_scripts %}

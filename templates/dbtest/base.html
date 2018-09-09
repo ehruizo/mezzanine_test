@@ -3,40 +3,28 @@
 
 {% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}Sales{% endif %}{% endblock %}
 
+{% block title %}Sales{% endblock %}
+
 {% block extra_css %}
 	<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker3.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
 {% endblock %}
 
 {% block content %}
-{% nevercache %}
-{% if messages %}
-	<div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-		<div class="messages">
-		{% for message in messages %}
-			<div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				{{ message }}
-			</div>
-		{% endfor %}
-		</div>
+	<div class="mdl-cell mdl-cell--12-col">
+		<h4>{% block section_title %}{% endblock %}</h4>
 	</div>
-{% endif %}
-{% endnevercache %}
-<div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col mdl-grid">
-	<h4 class="mdl-cell mdl-cell--8-col mdl-grid">{% block title %}{% endblock %}</h4>
-	<div class="mdl-cell mdl-cell--8-col mdl-grid">
+	<div class="mdl-cell mdl-cell--7-col">
 		{% block main %}{% endblock %}
 	</div>
-</div>
-<div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
-	<div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+	<div class="demo-cards mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+	<div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
 		<div class="mdl-card__actions mdl-card--border">
 			{% block right_block_options %}{% endblock %}
 		</div>
 	</div>
 	<div class="demo-separator mdl-cell--1-col"></div>
-	<div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+	<div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
 		<div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
 			<h3>Otros enlaces</h3>
 			{% include "dbtest/include_links.html" %}
@@ -48,6 +36,5 @@
 {% block extra_js %}
 	<script src="{% static 'js/js.cookie.js' %}"></script>
 	<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
-	<script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
 	{% block extra_scripts %}{% endblock %}
 {% endblock %}

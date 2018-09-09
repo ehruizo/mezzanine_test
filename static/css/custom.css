@@ -3,3 +3,7 @@
 .transposed th { background-color: #BDBDBD;}
 
 .dataentry th, .dataentry td { padding: 2px;}
+
+input, label {
+    display: block;
+}

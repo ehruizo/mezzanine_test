@@ -1,6 +1,6 @@
 {% extends "dbtest/base.html" %}
 
-{% block title %}Crear usuario{% endblock %}
+{% block section_title %}Nuevo Cliente{% endblock %}
 
 {% block main %}
 <form action="" method="post">
@@ -8,8 +8,8 @@
 	<table class="dataentry">
 	{{ form.as_table }}
 	</table>
-	<input type="submit" value="Aceptar" />
-	<input type="reset" value="Borrar" />
+	<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Aceptar" />
+	<input type="reset" class="mdl-button mdl-js-button mdl-button--raised" value="Borrar" />
 </form>
 {% endblock %}
 

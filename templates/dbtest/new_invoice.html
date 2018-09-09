@@ -1,16 +1,18 @@
 {% extends "dbtest/base.html" %}
 
-{% block title %}Nueva Factura{% endblock %}
+{% block section_title %}Nueva Factura{% endblock %}
+
+{% block right_block_options %}
+	<a href="{% url 'dbtest:newuser' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">person_add</i>Nuevo cliente</a>
+{% endblock %}
 
 {% block main %}
-
+<p>Cliente: <a href="{% url 'dbtest:userinv' user_data.document %}">{{ user_data.last_name }}, {{ user_data.first_name }}</a></p>
 <form action="" method="post">
 	{% csrf_token %}
-	<ul>
-		<li><strong>Usuario:</strong> <a href="{% url 'dbtest:userinv' user_data.document %}">{{ user_data.last_name }}, {{ user_data.first_name }}</a></li>
-		{{ form.as_ul }}
-	</ul>
-	<input type="submit" value="Crear" />
+	{{ form }}
+	<br/>
+	<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="Crear" />
 </form>
 {% endblock %}
 
